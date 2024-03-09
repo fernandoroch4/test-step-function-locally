@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: amazon/aws-stepfunctions-local:latest
-      # options: --user root
+      options: --user runner
 
     steps:
       - name: Checkout repository files

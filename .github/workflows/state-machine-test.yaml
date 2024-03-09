@@ -1,0 +1,21 @@
+name: "[State Machine] - Testing orquestrator"
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  container-test-job:
+    runs-on: ubuntu-latest
+    container: 
+      image: amazon/aws-stepfunctions-local
+      ports:
+        - 8083:8083
+      
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Checking repository files
+        run: ls -la

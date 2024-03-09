@@ -29,5 +29,5 @@ jobs:
         run: ls -la
       
       - name: Testing Step Function Local
-        run: $SFN list-executions
+        run: $SFN create-state-machine --name Test1 --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
       

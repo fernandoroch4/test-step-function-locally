@@ -7,7 +7,8 @@
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
       "Parameters": {
-        "Payload.$": "$"
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:377217332906:function:query-engine:$LATEST"
       },
       "Retry": [
         {
@@ -50,7 +51,8 @@
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
       "Parameters": {
-        "Payload.$": "$"
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:377217332906:function:query-engine:$LATEST"
       },
       "Retry": [
         {
@@ -80,7 +82,8 @@
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
       "Parameters": {
-        "Payload.$": "$"
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:377217332906:function:query-engine:$LATEST"
       },
       "Retry": [
         {
@@ -121,7 +124,8 @@
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
       "Parameters": {
-        "Payload.$": "$"
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:377217332906:function:query-engine:$LATEST"
       },
       "Retry": [
         {

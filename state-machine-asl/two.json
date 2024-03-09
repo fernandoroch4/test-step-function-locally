@@ -13,29 +13,8 @@
               "Resource": "arn:aws:states:::lambda:invoke",
               "OutputPath": "$.Payload",
               "Parameters": {
-                "Payload.$": "$"
-              },
-              "Retry": [
-                {
-                  "ErrorEquals": [
-                    "Lambda.ServiceException",
-                    "Lambda.AWSLambdaException",
-                    "Lambda.SdkClientException",
-                    "Lambda.TooManyRequestsException"
-                  ],
-                  "IntervalSeconds": 1,
-                  "MaxAttempts": 3,
-                  "BackoffRate": 2
-                }
-              ],
-              "Next": "do something 2"
-            },
-            "do something 2": {
-              "Type": "Task",
-              "Resource": "arn:aws:states:::lambda:invoke",
-              "OutputPath": "$.Payload",
-              "Parameters": {
-                "Payload.$": "$"
+                "Payload.$": "$",
+                "FunctionName": "arn:aws:lambda:us-east-1:377217332906:function:query-engine:$LATEST"
               },
               "Retry": [
                 {
@@ -63,6 +42,48 @@
                   }
                 }
               },
+              "Next": "do something 2"
+            },
+            "do something 2": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "Payload.$": "$",
+                "FunctionName": "arn:aws:lambda:us-east-1:377217332906:function:query-engine:$LATEST"
+              },
+              "Retry": [
+                {
+                  "ErrorEquals": [
+                    "Lambda.ServiceException",
+                    "Lambda.AWSLambdaException",
+                    "Lambda.SdkClientException",
+                    "Lambda.TooManyRequestsException"
+                  ],
+                  "IntervalSeconds": 1,
+                  "MaxAttempts": 3,
+                  "BackoffRate": 2
+                }
+              ],
+              "Next": "update something"
+            },
+            "update something": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::dynamodb:updateItem",
+              "Parameters": {
+                "TableName": "MyDynamoDBTable",
+                "Key": {
+                  "Column": {
+                    "S": "MyEntry"
+                  }
+                },
+                "UpdateExpression": "SET MyKey = :myValueRef",
+                "ExpressionAttributeValues": {
+                  ":myValueRef": {
+                    "S": "MyValue"
+                  }
+                }
+              },
               "End": true
             }
           }
@@ -72,18 +93,19 @@
       "Catch": [
         {
           "ErrorEquals": [
-            "States.Timeout"
+            "States.ALL"
           ],
-          "Next": "error something"
+          "Next": "error something 1"
         }
       ]
     },
-    "error something": {
+    "error something 1": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
       "Parameters": {
-        "Payload.$": "$"
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:377217332906:function:query-engine:$LATEST"
       },
       "Retry": [
         {

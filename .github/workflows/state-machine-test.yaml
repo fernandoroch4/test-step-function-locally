@@ -11,7 +11,7 @@ jobs:
       image: amazon/aws-stepfunctions-local:latest
       options: 
         --user root
-        --name awsstepfunctionslocal
+        --expose 8083
       env:
         AWS_DEFAULT_REGION: default
         AWS_ACCESS_KEY_ID: default
@@ -31,5 +31,5 @@ jobs:
         run: ls -la
       
       - name: Testing Step Function Local
-        run: aws stepfunctions --endpoint-url http://awsstepfunctionslocal:8083 create-state-machine --name Test1 --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
+        run: aws stepfunctions --endpoint-url http://test-sfn:8083 create-state-machine --name Test1 --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
       

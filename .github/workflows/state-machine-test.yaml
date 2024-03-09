@@ -12,12 +12,12 @@ jobs:
   test-sfn:
     runs-on: ubuntu-latest
     container:
-      image: centos
+      image: amazon/aws-stepfunctions-local:latest
       # options: --user root
 
     steps:
-      - name: Checkout repository files
-        uses: actions/checkout@v3
+      # - name: Checkout repository files
+      #   uses: actions/checkout@v3
 
       - name: Check Step files
         run: ls -la

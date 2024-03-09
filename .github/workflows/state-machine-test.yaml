@@ -21,6 +21,11 @@ jobs:
           echo "SHELL: $SHELL"
         shell: bash
 
+      - name: Update and Install Dependencies
+        run: |
+          yum update
+        shell: bash
+
       - name: Checkout repository files
         uses: actions/checkout@v3
 

@@ -25,10 +25,11 @@ jobs:
       - name: Update and Install Dependencies
         run: |
           yum update -y
+          yum install -y tar
         shell: bash
 
       - name: Checkout repository files
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Check Step files
         run: ls -la

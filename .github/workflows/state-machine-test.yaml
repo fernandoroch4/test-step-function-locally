@@ -12,16 +12,10 @@ jobs:
   test-sfn:
     runs-on: ubuntu-latest
     container:
-      image: amazon/aws-stepfunctions-local:latest
-      options: --user root
+      image: centos
+      # options: --user root
 
     steps:
-      - name: Setup Path
-        shell: bash
-        run: |
-          PROJ_NEW_PATH=$(python -c "print('${{github.action_path}}'.replace('./.', '.'))")
-          echo "PROJ_NEW_PATH=$PROJ_NEW_PATH" >> $GITHUB_ENV
-
       - name: Checkout repository files
         uses: actions/checkout@v3
 

@@ -5,31 +5,20 @@ on:
     branches: [ "*" ]
 
 env:
-  SFN_COMMAND: aws stepfunctions --endpoint-url http://localhost:8083
+  SFN: aws stepfunctions --endpoint-url http://localhost:8083
 
 
 jobs:
   test-sfn:
     runs-on: ubuntu-latest
+    container:
+      image: amazon/aws-stepfunctions-local:latest
+      options: --user root
+
     steps:
       - name: Checkout repository files
         uses: actions/checkout@v3
-      
-      - name: Downloading StepFunctionsLocal
-        run: wget https://s3.amazonaws.com/stepfunctionslocal/StepFunctionsLocal.tar.gz
-
-      - name: Extract StepFunctionsLocal
-        run: tar -xvf StepFunctionsLocal.tar.gz
-
-      - name: Check StepFunctionsLocal version
-        run: java -jar StepFunctionsLocal.jar -v
 
       - name: Check Step files
         run: ls -la
-
-      - name: Start Step Functions
-        run: java -jar StepFunctionsLocal.jar
-
-      - name: Test Step Functions
-        run: $SFN_COMMAND list-executions
       

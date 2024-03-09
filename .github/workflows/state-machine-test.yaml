@@ -16,12 +16,6 @@ jobs:
       options: --user root
 
     steps:
-      - name: Debug Environment
-        run: |
-          echo "PATH: $PATH"
-          echo "SHELL: $SHELL"
-        shell: bash
-
       - name: Update and Install Dependencies
         run: |
           yum update -y
@@ -33,4 +27,7 @@ jobs:
 
       - name: Check Step files
         run: ls -la
+      
+      - name: Testing Step Function Local
+        run: $SFN list-executions
       

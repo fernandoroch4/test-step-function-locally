@@ -16,10 +16,11 @@ jobs:
       options: --user root
 
     steps:
-      - name: Check PATH
+      - name: Setup Path
+        shell: bash
         run: |
-          echo $PATH
-          echo ${{ github.action_path }}
+          PROJ_NEW_PATH=$(python -c "print('${{github.action_path}}'.replace('./.', '.'))")
+          echo "PROJ_NEW_PATH=$PROJ_NEW_PATH" >> $GITHUB_ENV
 
       - name: Checkout repository files
         uses: actions/checkout@v3

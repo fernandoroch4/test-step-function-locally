@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: amazon/aws-stepfunctions-local:latest
+      options: --user root
 
     steps:
       - name: Debug Environment

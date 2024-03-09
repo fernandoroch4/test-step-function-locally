@@ -28,11 +28,11 @@ jobs:
     #     AWS_SECRET_ACCESS_KEY: default
 
     steps:
-      - name: Update and Install Dependencies
-        run: |
-          yum update -y
-          yum install -y tar
-          yum install -y awscli
+      # - name: Update and Install Dependencies
+      #   run: |
+      #     yum update -y
+      #     yum install -y tar
+      #     yum install -y awscli
 
       - name: Checkout repository files
         uses: actions/checkout@v3

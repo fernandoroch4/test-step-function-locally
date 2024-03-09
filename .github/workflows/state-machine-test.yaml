@@ -13,13 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: amazon/aws-stepfunctions-local:latest
+      options: --user root
 
     steps:
       - name: Update and Install Dependencies
         run: |
-          sudo yum update -y
-          sudo yum install -y tar
-          sudo yum install -y awscli
+          yum update -y
+          yum install -y tar
+          yum install -y awscli
 
       - name: Checkout repository files
         uses: actions/checkout@v3

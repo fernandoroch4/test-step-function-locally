@@ -13,9 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: amazon/aws-stepfunctions-local:latest
-      options: --user runner
+      options: --user root
 
     steps:
+      - name: Check PATH
+        run: |
+          echo $PATH
+          echo ${{ github.action_path }}
+
       - name: Checkout repository files
         uses: actions/checkout@v3
 

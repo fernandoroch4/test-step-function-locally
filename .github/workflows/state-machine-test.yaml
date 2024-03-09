@@ -41,5 +41,5 @@ jobs:
         run: ls -la
       
       - name: Testing Step Function Local
-        run: aws stepfunctions --endpoint-url http://sfn:8083 create-state-machine --name Test1 --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
+        run: aws stepfunctions --endpoint-url http://sfn:8083 create-state-machine --name "Test1" --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition
       

@@ -4,16 +4,14 @@ on:
   push:
     branches: [ "*" ]
 
-env:
-  SFN: aws stepfunctions --endpoint-url http://localhost:8083
-
-
 jobs:
   test-sfn:
     runs-on: ubuntu-latest
     container:
       image: amazon/aws-stepfunctions-local:latest
-      options: --user root
+      options: 
+        --user root
+        --name awsstepfunctionslocal
       env:
         AWS_DEFAULT_REGION: default
         AWS_ACCESS_KEY_ID: default
@@ -33,5 +31,5 @@ jobs:
         run: ls -la
       
       - name: Testing Step Function Local
-        run: $SFN create-state-machine --name Test1 --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
+        run: aws stepfunctions --endpoint-url http://awsstepfunctionslocal:8083 create-state-machine --name Test1 --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
       

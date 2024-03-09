@@ -13,11 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: amazon/aws-stepfunctions-local:latest
-      # options: --user root
 
     steps:
-      # - name: Checkout repository files
-      #   uses: actions/checkout@v3
+      - name: Debug Environment
+        run: |
+          echo "PATH: $PATH"
+          echo "SHELL: $SHELL"
+        shell: bash
+
+      - name: Checkout repository files
+        uses: actions/checkout@v3
 
       - name: Check Step files
         run: ls -la

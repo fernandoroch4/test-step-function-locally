@@ -4,6 +4,7 @@ on: push
 
 env:
   ACTIONS_STEP_DEBUG: true
+  ACTIONS_RUNNER_DEBUG: true
 
 jobs:
   runner-job-test:
@@ -26,5 +27,9 @@ jobs:
         run: ls -la
       
       - name: Testing Step Function Local
-        run: aws stepfunctions --endpoint-url http://stepfunction:8083 create-state-machine --name "Test1" --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
+        run: aws stepfunctions --endpoint-url http://stepfunction:8083 create-state-machine --name "Test1" --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/test.json
         shell: bash
+        env:
+          AWS_ACCESS_KEY_ID: test
+          AWS_SECRET_ACCESS_KEY: test
+          AWS_REGION: us-east-1

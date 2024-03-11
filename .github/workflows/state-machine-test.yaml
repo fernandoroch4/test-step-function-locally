@@ -1,39 +1,16 @@
 name: "[State Machine] - Testing orquestrator"
 
-on:
-  push:
-    branches: [ "*" ]
+on: push
 
 jobs:
-  test-sfn:
+  runner-job:
     runs-on: ubuntu-latest
     services:
-      sfn:
+      stepfunction:
         image: amazon/aws-stepfunctions-local:latest
-        options: 
-          --user root
-          --expose 8083
-        env:
-          AWS_DEFAULT_REGION: default
-          AWS_ACCESS_KEY_ID: default
-          AWS_SECRET_ACCESS_KEY: default
-    # container:
-    #   image: amazon/aws-stepfunctions-local:latest
-    #   options: 
-    #     --user root
-    #     --expose 8083
-    #   env:
-    #     AWS_DEFAULT_REGION: default
-    #     AWS_ACCESS_KEY_ID: default
-    #     AWS_SECRET_ACCESS_KEY: default
-
+        ports:
+          - 8083:8083
     steps:
-      # - name: Update and Install Dependencies
-      #   run: |
-      #     yum update -y
-      #     yum install -y tar
-      #     yum install -y awscli
-
       - name: Checkout repository files
         uses: actions/checkout@v3
 
@@ -41,5 +18,5 @@ jobs:
         run: ls -la
       
       - name: Testing Step Function Local
-        run: aws stepfunctions --endpoint-url http://sfn:8083 create-state-machine --name "Test1" --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
+        run: aws stepfunctions --endpoint-url http://stepfunction:8083 create-state-machine --name "Test1" --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
       

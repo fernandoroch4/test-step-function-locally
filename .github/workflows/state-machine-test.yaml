@@ -2,8 +2,11 @@ name: "[State Machine] - Testing"
 
 on: push
 
+env:
+  ACTIONS_STEP_DEBUG: true
+
 jobs:
-  runner-job:
+  runner-job-test:
     runs-on: ubuntu-latest
     services:
       stepfunction:

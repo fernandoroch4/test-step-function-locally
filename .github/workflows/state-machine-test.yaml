@@ -1,4 +1,4 @@
-name: "[State Machine] - Testing orquestrator"
+name: "[State Machine] - Testing"
 
 on: push
 
@@ -24,4 +24,4 @@ jobs:
       
       - name: Testing Step Function Local
         run: aws stepfunctions --endpoint-url http://stepfunction:8083 create-state-machine --name "Test1" --role-arn "arn:aws:iam::012345678901:role/DummyRole" --definition file://state-machine-asl/one.json
-      
+        shell: bash
